@@ -1,0 +1,29 @@
+{
+    "name": "@silky/colors",
+    "version": "0.1.0",
+    "description": "Color manipulation library",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "scripts": {
+        "format": "prettier --config .prettierrc '{src, tests}/**/*.{ts, js, json, *rc, md}' --write",
+        "lint": "eslint . --ext .ts",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/davegomez/colors.git"
+    },
+    "keywords": [],
+    "author": "David Gomez <dg.dave@gmail.com>",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/davegomez/colors/issues"
+    },
+    "homepage": "https://github.com/davegomez/colors#readme",
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "^4.6.1",
+        "@typescript-eslint/parser": "^4.6.1",
+        "eslint": "^7.12.1",
+        "prettier": "^2.1.2"
+    }
+}
