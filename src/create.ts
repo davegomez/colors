@@ -77,41 +77,41 @@ const stringInputToRawColor = (input: string): ColorObject => {
       r: parseInt(match[1]),
       g: parseInt(match[2]),
       b: parseInt(match[3]),
-      a: parseInt(match[4]),
+      a: parseFloat(match[4]),
     };
   }
 
   if ((match = matchers.hsl.exec(color))) {
     return {
-      h: parseInt(match[1]),
-      s: parseInt(match[2]),
-      l: parseInt(match[3]),
+      h: parseFloat(match[1]),
+      s: parseFloat(match[2]),
+      l: parseFloat(match[3]),
     };
   }
 
   if ((match = matchers.hsla.exec(color))) {
     return {
-      h: parseInt(match[1]),
-      s: parseInt(match[2]),
-      l: parseInt(match[3]),
-      a: parseInt(match[4]),
+      h: parseFloat(match[1]),
+      s: parseFloat(match[2]),
+      l: parseFloat(match[3]),
+      a: parseFloat(match[4]),
     };
   }
 
   if ((match = matchers.hsv.exec(color))) {
     return {
-      h: parseInt(match[1]),
-      s: parseInt(match[2]),
-      v: parseInt(match[3]),
+      h: parseFloat(match[1]),
+      s: parseFloat(match[2]),
+      v: parseFloat(match[3]),
     };
   }
 
   if ((match = matchers.hsva.exec(color))) {
     return {
-      h: parseInt(match[1]),
-      s: parseInt(match[2]),
-      v: parseInt(match[3]),
-      a: parseInt(match[4]),
+      h: parseFloat(match[1]),
+      s: parseFloat(match[2]),
+      v: parseFloat(match[3]),
+      a: parseFloat(match[4]),
     };
   }
 
@@ -179,9 +179,9 @@ const inputToRGBA = (input: ColorObject | string): RawRGBA => {
     a = input.a ?? 1;
 
     if (
-      input.r &&
-      input.g &&
-      input.b &&
+      input.r !== undefined &&
+      input.g !== undefined &&
+      input.b !== undefined &&
       isValidCSSUnit(input.r) &&
       isValidCSSUnit(input.g) &&
       isValidCSSUnit(input.b)
@@ -190,9 +190,9 @@ const inputToRGBA = (input: ColorObject | string): RawRGBA => {
       ok = true;
       format = String(input.r).substr(-1) === '%' ? 'prgb' : 'rgb';
     } else if (
-      input.h &&
-      input.s &&
-      input.l &&
+      input.h !== undefined &&
+      input.s !== undefined &&
+      input.l !== undefined &&
       isValidCSSUnit(input.h) &&
       isValidCSSUnit(input.s) &&
       isValidCSSUnit(input.l)
@@ -203,9 +203,9 @@ const inputToRGBA = (input: ColorObject | string): RawRGBA => {
       ok = true;
       format = 'hsl';
     } else if (
-      input.h &&
-      input.s &&
-      input.v &&
+      input.h !== undefined &&
+      input.s !== undefined &&
+      input.v !== undefined &&
       isValidCSSUnit(input.h) &&
       isValidCSSUnit(input.s) &&
       isValidCSSUnit(input.v)
@@ -221,20 +221,20 @@ const inputToRGBA = (input: ColorObject | string): RawRGBA => {
   a = boundAlpha(a);
 
   return {
-    ok,
-    format,
     r: mathMin(255, mathMax(rgb.r, 0)),
     g: mathMin(255, mathMax(rgb.g, 0)),
     b: mathMin(255, mathMax(rgb.b, 0)),
     a,
+    format: input.format ?? format,
+    ok,
   };
 };
 
 export default (input: Input): Color => {
   const color = {
     ...inputToRGBA(input),
-    input,
     roundA: 100,
+    input,
   };
 
   color.roundA = mathRound(100 * color.a) / 100;
