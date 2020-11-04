@@ -16,22 +16,14 @@ import type {
 
 const trimLeft = /^\s+/;
 const trimRight = /\s+$/;
-const tinyCounter = 0;
 const mathRound = Math.round;
 const mathMin = Math.min;
 const mathMax = Math.max;
-const mathRandom = Math.random;
 
 /**
  * Parse a base-16 hex value into a base-10 integer
  */
 const parseIntFromHex = (value: string): number => parseInt(value, 16);
-
-/**
- * Converts a decimal to a hex value
- */
-const convertDecimalToHex = (value: string): string =>
-  Math.round(parseFloat(value) * 255).toString(16);
 
 /**
  * Converts a hex value to a decimal
