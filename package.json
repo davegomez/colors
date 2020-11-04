@@ -7,7 +7,8 @@
     "scripts": {
         "format": "prettier --config .prettierrc '{src, tests}/**/*.{ts, js, json, *rc, md}' --write",
         "lint": "eslint . --ext .ts",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "pretest": "tsc -p tsconfig.json",
+        "test": "tape 'dist/tests/**/*.test.js' | tap-spec"
     },
     "repository": {
         "type": "git",
@@ -24,6 +25,11 @@
         "@typescript-eslint/eslint-plugin": "^4.6.1",
         "@typescript-eslint/parser": "^4.6.1",
         "eslint": "^7.12.1",
-        "prettier": "^2.1.2"
+        "prettier": "^2.1.2",
+        "tap-spec": "^5.0.0",
+        "tape": "^5.0.1"
+    },
+    "dependencies": {
+        "@types/tape": "^4.13.0"
     }
 }
